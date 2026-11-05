@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUY KAREN - Thời Trang Trẻ & Hiện Đại</title>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="BANHANG.CSS">
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        ✨ ƯU ĐÃI SINH VIÊN: Giảm <span>10%</span> cho đơn hàng đầu tiên | Hotline đặt hàng: <span>0334673266</span>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+
+                <!-- Mobile Menu Icon -->
+                <button class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <!-- Brand Logo -->
+                <a href="#home" class="logo">
+                    HUY KAREN<span>.</span>
+                </a>
+
+                <!-- Navigation Links -->
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active" onclick="closeMobileMenu()">Trang Chủ</a></li>
+                    <li><a href="#products" class="nav-link" onclick="closeMobileMenu()">Sản Phẩm</a></li>
+                    <li><a href="#reviews" class="nav-link" onclick="closeMobileMenu()">Đánh Giá</a></li>
+                    <li><a href="#about" class="nav-link" onclick="closeMobileMenu()">Giới Thiệu</a></li>
+                    <li><a href="#contact" class="nav-link" onclick="closeMobileMenu()">Liên Hệ</a></li>
+                </ul>
+
+                <!-- Action Controls -->
+                <div class="nav-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Tìm sản phẩm...">
+                    </div>
+
+                    <button class="cart-btn" onclick="openCartDrawer()">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO BANNER -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <span class="hero-tag">Bộ Sưu Tập 2026</span>
+                        <h1 class="hero-title">Định Hình Phong Cách Trẻ Cùng HUY KAREN</h1>
+                        <p class="hero-subtitle">
+                            Thương hiệu quần áo & phụ kiện phong cách hiện đại, năng động,
+                            chuẩn phom dáng thiết kế dành riêng cho giới trẻ và sinh viên.
+                        </p>
+
+                        <div>
+                            <a href="#products" class="btn btn-primary">
+                                <i class="fa-solid fa-cart-shopping"></i> Mua Sắm Ngay
+                            </a>
+                            <a href="#about" class="btn btn-secondary">Về Thương Hiệu</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-img">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop" alt="HUY KAREN Fashion Banner">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCT SECTION -->
+        <section class="container" id="products">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Sản Phẩm Nổi Bật</h2>
+                    <p>Khám phá mẫu thời trang hot nhất tuần này</p>
+                </div>
+
+                <!-- Sort Filter -->
+                <div class="filter-controls">
+                    <select class="select-custom" id="sortSelect" onchange="applyFilters()">
+                        <option value="default">Sắp xếp: Mặc định</option>
+                        <option value="price-asc">Giá: Thấp đến Cao</option>
+                        <option value="price-desc">Giá: Cao đến Thấp</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills">
+                <button class="pill-btn active" onclick="filterCategory('All', this)">Tất Cả</button>
+                <button class="pill-btn" onclick="filterCategory('Áo T-Shirt', this)">Áo T-Shirt</button>
+                <button class="pill-btn" onclick="filterCategory('Áo Sơ Mi', this)">Áo Sơ Mi</button>
+                <button class="pill-btn" onclick="filterCategory('Quần Jeans', this)">Quần Jeans</button>
+                <button class="pill-btn" onclick="filterCategory('Áo Khoác', this)">Áo Khoác</button>
+                <button class="pill-btn" onclick="filterCategory('Phụ Kiện', this)">Phụ Kiện</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="productGrid">
+                <!-- JavaScript render sản phẩm tự động -->
+            </div>
+        </section>
+
+        <!-- REVIEWS SECTION -->
+        <section class="container" id="reviews">
+            <div class="reviews-section">
+                <div class="container">
+                    <div class="section-title" style="margin-bottom: 30px;">
+                        <h2>Đánh Giá Từ Khách Hàng</h2>
+                        <p>Trải nghiệm thực tế từ các bạn sinh viên và khách hàng thân thiết</p>
+                    </div>
+
+                    <div class="reviews-grid">
+                        <!-- Review List -->
+                        <div id="reviewsList">
+                            <!-- JavaScript render đánh giá -->
+                        </div>
+
+                        <!-- Add Review Form -->
+                        <div class="review-form-box">
+                            <h4 style="margin-bottom: 16px; font-weight: 800;">Gửi Nhận Xét Của Bạn</h4>
+
+                            <form id="reviewForm" onsubmit="submitReview(event)">
+                                <div class="form-group">
+                                    <label>Họ và Tên</label>
+                                    <input type="text" id="revName" class="form-control" placeholder="Nguyễn Văn A" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Đánh giá số sao</label>
+                                    <div class="star-rating-input" id="starInput">
+                                        <i class="fa-solid fa-star active" onclick="setRating(1)"></i>
+                                        <i class="fa-solid fa-star active" onclick="setRating(2)"></i>
+                                        <i class="fa-solid fa-star active" onclick="setRating(3)"></i>
+                                        <i class="fa-solid fa-star active" onclick="setRating(4)"></i>
+                                        <i class="fa-solid fa-star active" onclick="setRating(5)"></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nội dung nhận xét</label>
+                                    <textarea id="revComment" class="form-control" placeholder="Chia sẻ cảm nhận về chất lượng sản phẩm..." required></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                                    Gửi Đánh Giá
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT & CONTACT SECTION -->
+        <section class="container" id="about">
+            <div class="info-section">
+
+                <!-- About Us -->
+                <div class="about-box">
+                    <h3>Về HUY KAREN</h3>
+                    <p>
+                        <b>HUY KAREN</b> là thương hiệu thời trang uy tín chuyên cung cấp
+                        các mẫu quần áo, phụ kiện chuẩn phom dáng, phong cách trẻ trung
+                        phù hợp cho các bạn trẻ năng động.
+                    </p>
+                    <p>
+                        Chúng tôi cam kết chất lượng vải bền đẹp, thấm hút mồ hôi tốt,
+                        giá thành hợp lý hỗ trợ tối đa cho sinh viên và giới trẻ hiện đại.
+                    </p>
+
+                    <div style="margin-top: 20px;">
+                        <h4 style="font-weight:700; margin-bottom:8px;">Cam Kết Của Shop:</h4>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                            <li>Đổi trả miễn phí trong vòng 7 ngày nếu lỗi sản xuất.</li>
+                            <li>Hình ảnh thật 100% tự chụp tại shop.</li>
+                            <li>Giao hàng nhanh toàn quốc - Kiểm tra hàng trước khi thanh toán.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-box" id="contact">
+                    <h3>Thông Tin Cửa Hàng</h3>
+                    <ul class="contact-list">
+                        <li class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="contact-details">
+                                <h5>Địa chỉ</h5>
+                                <p>911/10/22 Quang Trung, Gò Vấp, TP.HCM</p>
+                            </div>
+                        </li>
+
+                        <li class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="contact-details">
+                                <h5>Hotline / Zalo</h5>
+                                <p>0334673266</p>
+                            </div>
+                        </li>
+
+                        <li class="contact-item">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="contact-details">
+                                <h5>Email</h5>
+                                <p>anhhuy888999666@gmail.com</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="logo" style="color: #fff;">HUY KAREN<span>.</span></a>
+                    <p style="margin-top: 12px;">
+                        Thương hiệu thời trang năng động cho giới trẻ và sinh viên.
+                        Tự tin thể hiện cá tính riêng.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Danh Mục</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">Áo T-Shirt</a></li>
+                        <li><a href="#products">Áo Sơ Mi</a></li>
+                        <li><a href="#products">Quần Jeans</a></li>
+                        <li><a href="#products">Áo Khoác</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Hướng dẫn chọn size</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách giao hàng</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fa-solid fa-location-dot"></i> 911/10/22 Quang Trung, Gò Vấp, TP.HCM</p>
+                    <p style="margin-top: 6px;"><i class="fa-solid fa-phone"></i> 0334673266</p>
+                    <p style="margin-top: 6px;"><i class="fa-solid fa-envelope"></i> anhhuy888999666@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 HUY KAREN Store. Đồ án trang web bán hàng thời trang sinh viên.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS & DRAWERS -->
+
+    <!-- Modal Xem Chi Tiết Sản Phẩm -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeProductModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="product-detail-grid">
+                <img id="modalImg" src="" alt="Product Detail" class="detail-img">
+
+                <div class="detail-content">
+                    <span id="modalCat" class="product-cat">DANH MỤC</span>
+                    <h2 id="modalTitle" style="font-size: 1.4rem; font-weight: 800; margin: 6px 0;">Tên Sản Phẩm</h2>
+                    <div id="modalRating" class="product-rating"></div>
+
+                    <div style="margin: 12px 0;">
+                        <span id="modalPrice" class="price-current" style="font-size: 1.4rem;">0đ</span>
+                        <span id="modalOldPrice" class="price-old" style="margin-left: 8px;">0đ</span>
+                    </div>
+
+                    <p id="modalDesc" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+                        Mô tả chi tiết sản phẩm...
+                    </p>
+
+                    <!-- Chọn Size -->
+                    <div class="option-group">
+                        <div class="option-title">Chọn Size</div>
+                        <div class="size-selector" id="sizeSelector">
+                            <!-- Render kích thước -->
+                        </div>
+                    </div>
+
+                    <!-- Chọn Màu Sắc -->
+                    <div class="option-group">
+                        <div class="option-title">Chọn Màu Sắc</div>
+                        <div class="color-selector" id="colorSelector">
+                            <!-- Render màu sắc -->
+                        </div>
+                    </div>
+
+                    <!-- Chọn Số Lượng -->
+                    <div class="option-group">
+                        <div class="option-title">Số Lượng</div>
+                        <div class="qty-picker">
+                            <button onclick="changeModalQty(-1)">-</button>
+                            <span id="modalQty">1</span>
+                            <button onclick="changeModalQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="addModalToCart()" style="margin-top: 20px; justify-content: center;">
+                        <i class="fa-solid fa-bag-shopping"></i> Thêm Vào Giỏ Hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Drawer Giỏ Hàng -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 style="font-weight: 800; font-size: 1.1rem;">
+                <i class="fa-solid fa-bag-shopping"></i> Giỏ Hàng Của Bạn
+            </h3>
+            <button class="modal-close" style="position: static;" onclick="closeCartDrawer()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-body" id="cartBody">
+            <!-- Render danh sách sản phẩm trong giỏ -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Tổng Tiền:</span>
+                <span id="cartTotal" style="color: var(--accent);">0đ</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openCheckoutModal()">
+                Thanh Toán Đơn Hàng
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Form Thanh Toán -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-card" style="max-width: 500px; padding: 28px;">
+            <button class="modal-close" onclick="closeCheckoutModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 style="font-weight: 800; margin-bottom: 20px; text-align: center;">Thông Tin Giao Hàng</h3>
+
+            <form onsubmit="processCheckout(event)">
+                <div class="form-group">
+                    <label>Họ và Tên người nhận</label>
+                    <input type="text" class="form-control" required placeholder="Nguyễn Văn A">
+                </div>
+
+                <div class="form-group">
+                    <label>Số Điện Thoại</label>
+                    <input type="tel" class="form-control" required placeholder="0334673266">
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ nhận hàng</label>
+                    <textarea class="form-control" required placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Ghi chú đơn hàng (nếu có)</label>
+                    <input type="text" class="form-control" placeholder="Giao giờ hành chính, gọi trước khi giao...">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+                    Xác Nhận Đặt Hàng
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Thông Báo Đặt Hàng Thành Công -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card" style="max-width: 420px; padding: 32px; text-align: center;">
+            <i class="fa-solid fa-circle-check" style="font-size: 3.5rem; color: var(--success); margin-bottom: 16px;"></i>
+            <h3 style="font-weight: 800; margin-bottom: 8px;">Đặt Hàng Thành Công!</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px;">
+                Cảm ơn bạn đã mua sắm tại <b>HUY KAREN</b>. Nhân viên cửa hàng sẽ liên hệ xác nhận đơn hàng qua SĐT sớm nhất!
+            </p>
+            <button class="btn btn-primary" style="justify-content: center; width: 100%;" onclick="closeSuccessModal()">
+                Hoàn Tất
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Toast Message -->
+    <div class="toast-msg" id="toastMsg">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="toastText">Đã thêm vào giỏ hàng!</span>
+    </div>
+
+    <!-- JavaScript riêng -->
+    <script src="BANHANG.JS" defer></script>
+
+</body>
+</html>
